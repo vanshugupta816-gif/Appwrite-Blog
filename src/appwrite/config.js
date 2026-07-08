@@ -1,5 +1,5 @@
-import Conf from "../conf/conf";
-import {Client, TablesDB, Storage, Query} from "appwrite"
+import Conf from "../Conf/Conf";
+import {Client, TablesDB, Storage, Query} from "Appwrite"
 
 class DbService{
     client = new Client();

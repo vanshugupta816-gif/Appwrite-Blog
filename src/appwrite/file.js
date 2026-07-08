@@ -1,5 +1,5 @@
-import Conf from "../conf/conf";
-import {Client, ID, Storage} from "appwrite"
+import Conf from "../Conf/Conf";
+import {Client, ID, Storage} from "Appwrite"
 
 class FileService{
     client = new Client();
