@@ -1,4 +1,4 @@
-import Conf from "../Conf/Conf";
+import Conf from "../conf/conf";
 import {Client, Account, ID} from "Appwrite"
 
 export class AuthService{

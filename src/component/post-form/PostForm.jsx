@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect} from 'react'
 import { useForm } from 'react-hook-form'
-import appwriteFileService from '../../Appwrite/File'
-import dbService from '../../Appwrite/Config'
-import {Select, Button, RTE, Input} from '../Index'
+import appwriteFileService from '../../appwrite/file'
+import dbService from '../../appwrite/config'
+import {Select, Button, RTE, Input} from '../index'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { updatePost, addPost } from '../../Store/PostSlice'
+import { updatePost, addPost } from '../../store/postSlice'
 import { useDispatch } from 'react-redux'
-import { sanitizePost } from '../../Utils/SanitizePost'
+import { sanitizePost } from '../../utils/sanitizePost'
 
 // We will be sending the label and will be taking control from the 'RTE'...
 function PostForm({post}) {

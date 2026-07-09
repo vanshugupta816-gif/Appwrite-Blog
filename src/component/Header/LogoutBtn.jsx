@@ -1,9 +1,9 @@
 import React from 'react'
-import authService from '../../Appwrite/Auth'
+import authService from '../../appwrite/auth'
 import {useDispatch} from 'react-redux'
-import { logout } from '../../Store/AuthSlice';
+import { logout } from '../../store/authSlice';
 import { useNavigate } from 'react-router-dom';
-import { clearAllPosts } from '../../Store/PostSlice'; 
+import { clearAllPosts } from '../../store/postSlice'; 
 
 function LogoutBtn() {
     const dispatch = useDispatch();

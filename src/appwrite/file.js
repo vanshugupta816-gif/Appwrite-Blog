@@ -1,4 +1,4 @@
-import Conf from "../Conf/Conf";
+import Conf from "../conf/conf";
 import {Client, ID, Storage} from "Appwrite"
 
 class FileService{

@@ -1,4 +1,4 @@
-import Conf from "../Conf/Conf";
+import Conf from "../conf/conf";
 import {Client, TablesDB, Storage, Query} from "Appwrite"
 
 class DbService{

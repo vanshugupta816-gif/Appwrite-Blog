@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import { Container, PostCard } from '../Component/Index'
-import appwriteDbService from '../Appwrite/Config'
+import { Container, PostCard } from '../component/index'
+import appwriteDbService from '../appwrite/config'
 import { useDispatch, useSelector } from 'react-redux';
-import { setPosts } from '../Store/PostSlice';
-import { sanitizePost } from '../Utils/SanitizePost';
+import { setPosts } from '../store/postSlice';
+import { sanitizePost } from '../utils/sanitizePost';
 
 function AllPosts() {
     

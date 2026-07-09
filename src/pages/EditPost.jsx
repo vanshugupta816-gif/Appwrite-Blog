@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Container, PostForm} from '../Component/Index'
-import appWriteDbService from '../Appwrite/Config'
+import { Container, PostForm} from '../component/index'
+import appWriteDbService from '../appwrite/config'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost } from '../Store/PostSlice';
-import { sanitizePost } from '../Utils/SanitizePost';
+import { addPost } from '../store/postSlice';
+import { sanitizePost } from '../utils/sanitizePost';
 
 function EditPost() {
     const navigate = useNavigate();

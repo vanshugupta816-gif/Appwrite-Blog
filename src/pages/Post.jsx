@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import { Button, Container } from '../Component/Index'
+import { Button, Container } from '../component/index'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import  appwriteDbService from '../Appwrite/Config'
-import appwriteFileService from '../Appwrite/File'
+import  appwriteDbService from '../appwrite/config'
+import appwriteFileService from '../appwrite/file'
 import parse from 'html-react-parser'
-import { deletePost as deletePostFromStore, addPost } from '../Store/PostSlice'
+import { deletePost as deletePostFromStore, addPost } from '../store/postSlice'
 import DOMPurify from "dompurify"
-import { sanitizePost } from '../Utils/SanitizePost'
+import { sanitizePost } from '../utils/sanitizePost'
 
 function Post() {
     
