@@ -1,5 +1,5 @@
 import React from 'react'
-import appWriteService from '../appwrite/file'
+import appWriteService from '../Appwrite/File'
 import {Link} from 'react-router-dom'
 
 // Post Card is the card that contains user's blog, which user can see after login... 

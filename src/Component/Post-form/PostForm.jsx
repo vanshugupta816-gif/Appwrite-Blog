@@ -1,22 +1,25 @@
-import React, {useCallback, useEffect} from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import appwriteFileService from '../../appwrite/file'
-import dbService from '../../appwrite/config'
-import {Select, Button, RTE, Input} from '../index'
+import appwriteFileService from '../../Appwrite/File'
+import dbService from '../../Appwrite/Config'
+import Select from '../Select'
+import Button from '../Button'
+import RTE from '../RTE'
+import Input from '../Input'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { updatePost, addPost } from '../../store/postSlice'
+import { updatePost, addPost } from '../../Store/PostSlice'
 import { useDispatch } from 'react-redux'
-import { sanitizePost } from '../../utils/sanitizePost'
+import { sanitizePost } from '../../Utils/SanitizePost'
 
 // We will be sending the label and will be taking control from the 'RTE'...
-function PostForm({post}) {
+function PostForm({ post }) {
     const navigate = useNavigate();
     const userData = useSelector(state => state.auth.userData);
     const dispatch = useDispatch();
 
     // Watch() listens to form field changes...
-    const {register, handleSubmit, watch, setValue, control, getValues} = useForm({
+    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {    // These defaultValues acts as an storage to hold the current details of our post...
             title: post?.title || '',
             slug: post?.$id || '',
@@ -25,19 +28,19 @@ function PostForm({post}) {
         },
     })
 
-    const submit = async (data)=>{
-        
-        if(post){ // if post exists we need to just update the current post... 
-            const file = data.image[0] 
-            ? await appwriteFileService .uploadFile(data.image[0]) 
-            : null;
-                        
+    const submit = async (data) => {
+
+        if (post) { // if post exists we need to just update the current post... 
+            const file = data.image[0]
+                ? await appwriteFileService.uploadFile(data.image[0])
+                : null;
+
             const dbPost = await dbService.updatePost(post.$id, {
-                ...data, 
+                ...data,
                 featuredimage: file ? file.$id : undefined
             });
-        
-            if(file && dbPost){
+
+            if (file && dbPost) {
                 await appwriteFileService.deleteFile(post.featuredimage);
             }
 
@@ -46,18 +49,18 @@ function PostForm({post}) {
                 updatePost(sanitizePost(dbPost))
             );
 
-            if(dbPost){
+            if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
             }
         }
         else { // else if post doesn't exist we need to create the new post 
-            const file = data.image[0] ? await appwriteFileService .uploadFile(data.image[0]) : null;
-            
+            const file = data.image[0] ? await appwriteFileService.uploadFile(data.image[0]) : null;
+
             // if the user has uploads the image in its blog then only store its info...
-            if(file){
+            if (file) {
                 data.featuredimage = file.$id;
-            }    
-            
+            }
+
             const dbPost = await dbService.createPost({
                 ...data,
                 userId: userData.$id
@@ -68,14 +71,14 @@ function PostForm({post}) {
                 addPost(sanitizePost(dbPost))
             );
 
-            if(dbPost){
+            if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
-            } 
+            }
         }
-    }  
+    }
 
-    const slugTransform = useCallback((value)=>{
-        if(value && typeof value === 'string'){
+    const slugTransform = useCallback((value) => {
+        if (value && typeof value === 'string') {
             return value
                 .trim()
                 .toLowerCase()
@@ -86,21 +89,21 @@ function PostForm({post}) {
     }, []);
 
 
-    useEffect(()=>{
-        const subsciption = watch((value, {name}) =>{
-            if(name === 'title'){
-                setValue('slug', slugTransform(value.title), 
-                    {shouldValidate: true}
+    useEffect(() => {
+        const subsciption = watch((value, { name }) => {
+            if (name === 'title') {
+                setValue('slug', slugTransform(value.title),
+                    { shouldValidate: true }
                 );
             }
         });
 
-        return ()=>{
+        return () => {
             subsciption.unsubscribe();
         }
 
     }, [watch, slugTransform, setValue])
-    
+
     return (
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             {/*    Left half   */}
@@ -109,7 +112,7 @@ function PostForm({post}) {
                     label="Title :"
                     placeholder="Title"
                     className="mb-4"
-                    
+
                     {...register("title", { required: true })}
                 />
 
@@ -119,17 +122,18 @@ function PostForm({post}) {
                     className="mb-4"
                     {...register("slug", { required: true })}
                     onInput={(e) => {
-                        setValue("slug", 
-                        slugTransform(e.currentTarget.value), 
-                        { shouldValidate: true }
-                    )}}
+                        setValue("slug",
+                            slugTransform(e.currentTarget.value),
+                            { shouldValidate: true }
+                        )
+                    }}
                 />
 
-                <RTE 
-                label="Content :" 
-                name="content" 
-                control={control} 
-                defaultValue={getValues("content")} 
+                <RTE
+                    label="Content :"
+                    name="content"
+                    control={control}
+                    defaultValue={getValues("content")}
                 />
             </div>
 

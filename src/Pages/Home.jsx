@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import  appwriteDbService from '../appwrite/config'
-import { Container, PostCard } from '../component/index';
+import appwriteDbService from '../Appwrite/Config'
+import { Container, PostCard } from '../Component/Index';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPosts } from '../store/postSlice';
-import { sanitizePost } from '../utils/sanitizePost';
+import { setPosts } from '../Store/PostSlice';
+import { sanitizePost } from '../Utils/SanitizePost';
 
 function Home() {
 

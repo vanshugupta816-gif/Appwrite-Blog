@@ -9,8 +9,8 @@ import RTE from "./RTE"
 import Select from "./Select"
 import Login from "./Login"
 import Signup from "./Signup" 
-import PostForm from "./post-form/PostForm"
-import Container from "./container/container"
+import PostForm from "./Post-form/PostForm"
+import Container from "./Container/Container"
 import AuthLayout from "./AuthLayout"
 
 export {
