@@ -11,11 +11,12 @@ function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.post.posts)
+    const fetchedAll = useSelector((state) => state.post.fetchedAll)
     const authStatus = useSelector((state) => state.auth.status);
 
     useEffect(()=>{     
         
-        if(!posts.length && authStatus){
+        if(!fetchedAll && authStatus){
                         
             appwriteDbService.getAllActivePosts()
             .then((existingPosts)=>{
@@ -29,7 +30,7 @@ function Home() {
             });
         }
         
-    }, [authStatus, posts.length]);
+    }, [authStatus, fetchedAll, dispatch]);
 
     if(posts.length === 0){
         return (

@@ -3,7 +3,8 @@ import React from 'react'
 
 const initialState = {
     posts: [],
-    loading: false
+    loading: false,
+    fetchedAll: false
 };
 
 const PostSlice = createSlice({
@@ -15,6 +16,7 @@ const PostSlice = createSlice({
         // it will be used when we fetch posts from the appwrite...
         setPosts: (state, action)=>{
             state.posts = action.payload;
+            state.fetchedAll = true;
             console.log("Posts are set successfully...");
             console.log("Total posts: " , action.payload.length);
         },
@@ -51,6 +53,7 @@ const PostSlice = createSlice({
         clearAllPosts: (state, action)=>{
             state.posts = [];
             state.loading = false;
+            state.fetchedAll = false;
             console.log("Posts are cleared successfully...");
         }
     }

@@ -8,11 +8,12 @@ import { sanitizePost } from '../Utils/SanitizePost';
 function AllPosts() {
     
     // whenever this page is loaded, just fetch all the existing posts in the redux store...
-    const posts = useSelector((state) => state.post.posts);   
+    const posts = useSelector((state) => state.post.posts);
+    const fetchedAll = useSelector((state) => state.post.fetchedAll);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(!posts.length){
+        if(!fetchedAll){
             appwriteDbService.getAllActivePosts()
             .then((existingPosts) => {
                 if(existingPosts){
@@ -23,7 +24,7 @@ function AllPosts() {
             });
         }
 
-    }, [posts.length, dispatch]);
+    }, [fetchedAll, dispatch]);
 
     return (
         <div className='w-full py-8'>
