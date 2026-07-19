@@ -40,7 +40,7 @@ function Post() {
         }
     }, [slug, navigate, post, dispatch])
     
-    const isAuthor = (post && userData) ? true : false;
+    const isAuthor = (post && userData) ? post.userId === userData.$id : false;
 
     const deletePost = ()=>{
         appwriteDbService.deletePost(post.$id)

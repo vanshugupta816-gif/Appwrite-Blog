@@ -12,6 +12,7 @@ function EditPost() {
     const dispatch = useDispatch();
     const post = useSelector((state) => state.post.posts)
                     .find(currPost => currPost.$id === slug);
+    const userData = useSelector((state) => state.auth.userData);
 
     useEffect(() => {
         
@@ -20,11 +21,20 @@ function EditPost() {
             return;
         }
 
+        if (post && userData && post.userId !== userData.$id) {
+            navigate('/');
+            return;
+        }
+
         if (!post) {
             appWriteDbService.getPost(slug)
                 .then((existingPost) => {
                     if (existingPost) {
-                        dispatch(addPost(sanitizePost(existingPost)));
+                        if (existingPost.userId !== userData?.$id) {
+                            navigate('/');
+                        } else {
+                            dispatch(addPost(sanitizePost(existingPost)));
+                        }
                     } else {
                         navigate('/');
                     }
@@ -32,7 +42,7 @@ function EditPost() {
                 .catch(() => navigate('/'));
         }
 
-    }, [slug, post, dispatch, navigate]);
+    }, [slug, post, dispatch, navigate, userData]);
     
     return post ? (
         <div className='py-8'>
